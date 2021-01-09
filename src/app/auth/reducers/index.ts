@@ -7,7 +7,7 @@ export interface AuthState {
 }
 
 export const initialAuthState: AuthState = {
-  user: undefined,
+  user: JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : undefined,
 };
 
 
@@ -17,6 +17,12 @@ export const authReducer = createReducer(
   on(AuthActions.login, (state, action) => {
     return {
       user: action.user
+    }
+  }),
+
+  on(AuthActions.logout,(state, action) => {
+    return {
+      user: undefined
     }
   })
 );
